@@ -1,0 +1,61 @@
+{% extends 'MyQuiz/base.html' %} {% block main_body %}
+<center>
+<h2 class="sec-title">Your Quiz Result </h2>
+
+  {% if user_result %}
+<div class="container main-container table-data" style="overflow-x:auto;">
+  <table border="2">
+    <tr>
+      <th align="left">FULL NAME</th>
+      <td align="left">{{full_name}}</td>
+    </tr>
+    <tr>
+      <th align="left">EMIAL</th>
+      <td align="left">{{email_id}}</td>
+    </tr>
+    <tr>
+      <th align="left">QUIZ PLAYED</th>
+      <td align="left">{{quiz_cat}}</td>
+    </tr>
+    <tr>
+      <th align="left">TOTAL QUESTIONS</th>
+      <td align="left">{{ quiz_questions }} </td>
+    </tr>
+    <tr>
+      <th align="left">QUESTION ATTEMPTED</th>
+      <td align="left">{{ user_attempetd }}</td>
+    </tr>
+    <tr>
+      <th align="left">CORRECT ANSWER</th>
+      <td align="left">{{correct_answer}}</td>
+    </tr>
+    <tr>
+      <th align="left">WRONG ANSWER</th>
+      <td align="left">{{wrong_answer}}</td>
+    </tr>
+    <tr>
+      <th align="left">POINTS</th>
+      <td align="left">{{total_points}}/ 100</td>
+    </tr>
+  </table>
+</div>
+</center>
+<h2 class="sec-title">Your Response </h2>
+      {% for user_ans in user_answers %}
+      <div class="quiz-container">
+        <div class="quiz-card">
+          <h3> {{user_ans.qn_name}} </h3>
+          <label> <b> You Answerd : </b><span {% if  user_ans.qn_ans == user_ans.crt_ans %} style="color:green" {% else %} style="color:red" {% endif %}>{{ user_ans.qn_ans }}</span> {% if  user_ans.qn_ans == user_ans.crt_ans %} <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+            {% else %} <svg class="crossmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path class="checkmark__check" fill="none" d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"/></svg> {% endif %}</label>
+          <label><b>  Correct  Answer Is  </b> : <span style="color:green">{{ user_ans.crt_ans }}</span></label>   
+          <label> <b> Score : </b> <span {% if  user_ans.qn_ans == user_ans.crt_ans %} style="color:green" {% else %} style="color:red" {% endif %}> {% if  user_ans.qn_ans == user_ans.crt_ans %} 10 {% else %} 0 {% endif %}</span></label>
+        </div>
+      </div>
+      {% endfor %}
+
+  {% else %}
+  <h1>Not Available</h1>
+  {% endif %}
+
+
+{% endblock main_body %}

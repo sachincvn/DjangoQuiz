@@ -1,0 +1,62 @@
+{% extends 'MyQuiz/base.html' %} {% load static %} {% block main_body %}
+
+<div class="main-container container">
+  <h2 class="sec-title">Add Quizz</h2>
+  <center>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <table>
+      <tr> 
+        <th align="left"> Quiz Category Name </th>
+        <th align="left"> :  <input required  placeholder="Quiz Category Name" type="text" name="quiz_cat" /> </th>
+        <th align="left"> Quiz Descripton </th>
+        <th align="left"> :  <input required  placeholder="Quiz Descripton" type="text" name="quiz_desc" /> </th>
+      </tr>
+      <tr>
+        <th align="left"> Quiz Title </th>
+        <th align="left"> :  <input required  placeholder="Quiz Title" type="text" name="quiz_title" /> </th>
+        <th align="left"> Quiz URL </th>
+        <th align="left"> :  <input required  placeholder="Quiz User (No Specail Symbol/White Space)" type="text" name="quiz_url" /> </th>
+      </tr>
+      <tr>
+        <th align="left"> Thumbnail </th>
+        <th align="left"> :  <input required type="file" name="quiz_thumb" /> </th>
+      </tr>
+      <tr>
+        <td  colspan="4"><button type="submit">Add Quiz Topic</button></td>
+      </tr>
+      <tr row>
+
+      </tr>
+    </table>
+  </form>
+  </center>
+  {% if quiz_topics %}
+  <h2 class="sec-title">List of Quiz Category</h2>
+  {% else %}
+  <h2 class="sec-title">Nothing Available</h2>
+  {% endif %}
+  <div class="quiz-container">
+    <table>
+    {% for quizz in  quiz_topics %}
+      <div class="quiz-card">
+        <span>Quiz Topic  : <b> {{quizz.quiz_cat}} </b> </span>
+        <div class="row">
+            <a  style="border:2px solid green" href="{{quizz.quiz_cat}}/addquestion"><b>Add Question</b></a>
+            <form action="{% url 'deletequiz' quizz.quiz_cat %}" method="POST">
+              {% csrf_token %}
+              <input style="border:2px solid red; border-radius: 15px;padding: 0.4rem;  font-size: 12px;" type="submit" value="Delete Category">
+            </form>
+            <a style="border:2px solid blue" href="{{quizz.quiz_cat}}/user-response"><b>User Response</b></a>
+        </div>
+      </div>
+    {% endfor %}
+    </table>
+</div>
+
+
+  </div>
+
+  {% endblock main_body %}
+</div>

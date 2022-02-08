@@ -1,0 +1,41 @@
+{% extends 'MyQuiz/base.html' %}
+{% block main_body %}
+
+<div class="container main-container">
+    <h1 class="sec-title">
+        User Response For {{quizcat}}
+    </h1>
+
+    {% if total_response %}
+    <h1>Response Available</h1>
+    <div class="table-data" style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th> UserName </th>
+      <th>Full Name</th>
+      <th>Email ID</th>
+      <th>Question Attempted</th>
+      <th>Correct Answer</th>
+      <th>Wrong Answer</th>
+      <th>Points</th>
+    </tr>
+    {% for responses in  total_response%}
+    <tr>
+      <td>{{responses.username}}</td>
+      <td>{{responses.fullname}}</td>
+      <td>{{responses.emailid}}</td>
+      <td>{{responses.question_attempted}}</td>
+      <td>{{responses.correct_answer}}</td>
+      <td>{{responses.wrong_answer}}</td>
+      <td>{{responses.total_score}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+    {% else %}
+    <h1>Response Not Available By User</h1>
+    {% endif %}
+</div>
+
+{% endblock main_body %}
+

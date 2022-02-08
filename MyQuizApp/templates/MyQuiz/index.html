@@ -1,0 +1,82 @@
+{% extends 'MyQuiz/base.html' %}
+
+{% block main_body %}
+{% load static %}
+
+  <div class="message">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>
+        <span class="closebtn">×</span>
+        <strong>Message ! </strong> {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+
+
+      <section class="header">
+        <div class="left-section">
+          <h1>Check You Basic Skill's</h1>
+          <p>
+            Play Quiz and Test Your Knowledge, Live Quiz About Basic Programming
+            Languages Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Et voluptatem veniam esse sapiente ipsam?
+          </p>
+
+          <button class="btn-primary">Start Quiz</button>
+          <button class="btn-secondary">Register</button>
+        </div>
+        <div class="right-section">
+          <img src="{% static 'MyQuiz/images/quizz.jpg' %}" alt="" />
+        </div>
+      </section>
+      
+<main>
+      <section class="main-conainer">
+        <h2 class="sec-title"> Choose Category </h2>
+      <div class="container">
+
+        {% if quizs_topic %}
+        {% for quizs in quizs_topic %}
+
+        <div class="cards">
+          <img src="{{quizs.quiz_thumb}}" alt="" />
+          <div class="content">
+            <h1>{{quizs.quiz_title}}</h1>
+            <table>
+              <tr>
+                <th align='left'><span class="quiz_topic">Category </span></th>
+                <th align='left'>:</th>
+                <td align'left'><span> {{quizs.quiz_cat}}</span></td>
+              </tr>
+              <tr>
+                <th align='left'><span class="quiz_topic">Questions</span></th>
+                <th align='left'>:</th>
+                <td align'left'><span> 10</span></td>
+              </tr>
+              {% comment %} <tr>
+                <th align='left'><span class="quiz_topic">Time</span></th>
+                <th align='left'>:</th>
+                <td align'left'><span> 5:00</span></td>
+              </tr> {% endcomment %}
+            </table>
+            
+            <p>
+              {{quizs.quiz_desc}}
+            </p>
+            <a href="quiz/{{quizs.quiz_url}}">Start Now</a>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 style="margin:10px">No Quiz Available Currently, Please Check Again Later</h1>
+        {% endif %}
+
+         
+      </div>
+      </section>
+
+    </main>
+    {% endblock main_body %}

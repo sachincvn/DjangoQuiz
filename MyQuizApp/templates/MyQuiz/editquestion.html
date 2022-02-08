@@ -1,0 +1,43 @@
+{% extends 'MyQuiz/base.html' %}
+{% load static %}
+{% block main_body %}
+<div class="main-container container">
+  <h2 class="sec-title">UPDATE THE QUESTION </h2>
+  <center>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+{% for qn in  edit_question %}
+    <table>
+      <tr>
+        <th align="left">Question Category</th>
+        <td align="left">: <input required placeholder="Quiz Category Name" type="text" name="qn_cat" value="{{qn.qn_cat}}" /></td>
+        <th align="left">Question Title</th>
+        <td align="left">: <input required placeholder="Quiz Title" type="text" name="qn_title" value="{{qn.qn_title}}" /></td>
+      </tr>
+      <tr>
+        <th align="left">Question ?</th>
+        <td align="left">: <textarea required  placeholder="Question ?" type="text" name="qn_name"/>{{qn.qn_name}}</textarea></td>
+        <th align="left">Correct Answer</th>
+        <td align="left">: <input required  placeholder="Correct Answer" type="text" name="qn_ans" value="{{qn.qn_ans}}"/></td>
+      </tr>
+      <tr>
+        <th align="left">Option 1</th>
+        <td align="left">: <input required  placeholder="Option 1" type="text" name="qn_opt1" value="{{qn.qn_opt1}}"/></td>
+        <th align="left">Option 2</th>
+        <td align="left">: <input required  placeholder="Option 2" type="text" name="qn_opt2" value="{{qn.qn_opt2}}"/></td>
+      </tr>
+      <tr>
+        <th align="left">Option 3</th>
+        <td align="left">: <input required  placeholder="Option 3" type="text" name="qn_opt3" value="{{qn.qn_opt3}}"/></td>
+        <th align="left">Option 4</th>
+        <td align="left">: <input required  placeholder="Option 4" type="text" name="qn_opt4" value="{{qn.qn_opt4}}"/></td>
+      </tr>
+      <tr>
+        <td colspan="4"><button type="submit">Update Question</button></td>
+      </tr>
+    </table>
+    {% endfor %}
+  </form>
+</center>
+  </div>
+{% endblock main_body %}

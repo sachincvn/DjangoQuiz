@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play Quizz</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MyQuiz/css/utility.css' %} " />
+    <link rel="stylesheet" href="{% static 'MyQuiz/css/style.css' %} " />
+    <script src="{% static 'MyQuiz/js/index.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    {% block head_content %}{% endblock head_content %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav id="nav-bar" class="nav-bar">
+        <div class="logo">
+          <h1>MyQuizz</h1>
+        </div>
+        <div id="MenuItems" class="quick-links">
+          <ul>
+            <a href="/">Home</a>
+            <a href="#">About</a>          
+          {% if user.is_authenticated %}
+          {% if user.is_staff %}
+              <a  style="margin-right:5px;color:white" class="nav-btn" href="/addquiz">Admin</a>
+          {% endif %}
+          <div class="dropdown">
+            <button class="dropbtn nav-btn">
+              MyProfile
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="#">Edit Profile</a>
+              <a href="/logout">Logout</a>
+            </div>
+          </div>
+          {% else %}
+          <a class="nav-btn" style="color:white" href="/login" href="login">Login</a>
+          <a class="nav-btn" style="color:white" href="/signup" href="signup">Sign Up</a>
+          {% endif %}
+        </div>
+        </ul>
+        <img onclick="navBar()" src="{% static 'MyQuiz/images/menu.png' %}" class="menu-icon"width="25px" height="25px">
+      </nav>
+    </header>
+
+    {% block main_body %}{% endblock main_body %}
+
+    <footer id="footer">
+      <div class="logo">
+        <h1>MyQuiz</h1>
+      </div>
+      <div class="quick-link">
+        <ul>
+          <a href="#">Home</a>
+          <a href="#">Login</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Features</a>
+        </ul>
+      </div>
+      <hr />
+      <div class="foot">Copyright &copy 2022 | Made By Project 5-Group</div>
+    </footer>
+    <script>
+      var MenuItems = document.getElementById("MenuItems");
+      var isRes = false;
+      function navBar(){
+            if(isRes == false){
+               isRes = true;
+               MenuItems.style.display = "block";
+            }
+            else{
+               isRes = false;
+               MenuItems.style.display = "none";
+            }
+         }
+    </script>
+  </body>
+</html>

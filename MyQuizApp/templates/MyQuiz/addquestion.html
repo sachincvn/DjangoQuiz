@@ -1,0 +1,91 @@
+{% extends 'MyQuiz/base.html' %}
+{% block main_body %}
+
+  <div class="message">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>
+        <span class="closebtn">×</span>
+        <strong>Message ! </strong> {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+
+<div class="main-container container">
+  <h2 class="sec-title">Add Question To  : {{quizcat}} </h2>
+  <center>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <table>
+      <tr>
+        <th align="left">Question Category</th>
+        <td align="left">: <input required placeholder="Quiz Category Name" type="text" name="qn_cat" value="{{quizcat}}" /></td>
+        <th align="left">Question Title</th>
+        <td align="left">: <input required placeholder="Quiz Title" type="text" name="qn_title" value="{{quiztitile}}" /></td>
+      </tr>
+      <tr>
+        <th align="left">Question ?</th>
+        <td align="left">: <textarea required  placeholder="Question ?" type="text" name="qn_name" /></textarea></td>
+        <th align="left">Correct Answer</th>
+        <td align="left">: <input required  placeholder="Correct Answer" type="text" name="qn_ans" /></td>
+      </tr>
+      <tr>
+        <th align="left">Option 1</th>
+        <td align="left">: <input required  placeholder="Option 1" type="text" name="qn_opt1" /></td>
+        <th align="left">Option 2</th>
+        <td align="left">: <input required  placeholder="Option 2" type="text" name="qn_opt2" /></td>
+      </tr>
+      <tr>
+        <th align="left">Option 3</th>
+        <td align="left">: <input required  placeholder="Option 3" type="text" name="qn_opt3" /></td>
+        <th align="left">Option 4</th>
+        <td align="left">: <input required  placeholder="Option 4" type="text" name="qn_opt4" /></td>
+      </tr>
+      <tr>
+        <td colspan="4"><button type="submit">Add Question</button></td>
+      </tr>
+    </table>
+  </form>
+</center>
+  </div>
+  {% if quiz_questions %}
+  <h2 class="sec-title">Questions</h2>
+  {% for quiz_qn in quiz_questions %}
+      <div class="quiz-container">
+        <div class="quiz-card">
+          <h3> {{quiz_qn.qn_name}} </h3>
+          <label for="{{quiz_qn.qn_opt1}}{{quiz_qn.qn_id}}">
+            <input {% if quiz_qn.qn_opt1 == quiz_qn.qn_ans %}checked{% endif %} type="radio" id="{{quiz_qn.qn_opt1}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt1}}" />
+            {{quiz_qn.qn_opt1}}
+          </label>
+          <label for="{{quiz_qn.qn_opt2}}{{quiz_qn.qn_id}}">
+            <input {% if quiz_qn.qn_opt2 == quiz_qn.qn_ans %}checked{% endif %} type="radio" id="{{quiz_qn.qn_opt2}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt2}}" />
+            {{quiz_qn.qn_opt2}}
+          </label>
+          <label for="{{quiz_qn.qn_opt3}}{{quiz_qn.qn_id}}">
+            <input {% if quiz_qn.qn_opt3 == quiz_qn.qn_ans %}checked{% endif %} type="radio" id="{{quiz_qn.qn_opt3}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt3}}" />
+            {{quiz_qn.qn_opt3}}
+          </label>
+          <label for="{{quiz_qn.qn_opt4}}{{quiz_qn.qn_id}}">
+            <input {% if quiz_qn.qn_opt4 == quiz_qn.qn_ans %}checked{% endif %} type="radio" id="{{quiz_qn.qn_opt4}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt4}}" />
+            {{quiz_qn.qn_opt4}}
+          </label>
+          
+          <form action="{% url 'deletequestion' quiz_qn.qn_id %}" method="POST">
+              {% csrf_token %}
+              <a  href="{% url 'editquestion' quiz_qn.qn_id %}" style="border:2px solid green; border-radius: 15px;padding: 0.4rem;margin:5px;color:black;text-decoration: none;font-size: 12px;">Edit Question </a>
+
+              <input style="border:2px solid red; border-radius: 15px;padding: 0.4rem;  font-size: 12px;" type="submit" value="Delete Question"> 
+            </form>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% else %}
+<h2 class="sec-title">No Questions Available</h2>
+      {% endif %}
+
+{% endblock main_body %}

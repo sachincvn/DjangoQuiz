@@ -1,0 +1,105 @@
+{% extends 'MyQuiz/base.html' %}
+{% load static %}
+{% block main_body %}
+    <section class="header">
+      <div class="left-section">
+        <table>
+          <tr>
+            <th align="left">FIRST NAME</th>
+            <th>: </th>
+            <td>{{full_name}}</th>
+          </tr>
+          <tr>
+            <th align="left">EMAIL</th>
+            <th>: </th>
+            <td>{{email}}</th>
+          </tr>
+          <tr>
+            <th align="left">QUIZ ID </th>
+            <th>: </th>
+            <td>{{quiz_id}}</th>
+          </tr>
+          <tr>
+            <th align="left">QUIZ</th>
+            <th>: </th>
+            <td>{{quizcat}}</th>
+          </tr>
+        </table>
+      </div>
+      <div class="right-section">
+        <h1> TIME : <span id="stopwatch"> 00:00:00 </span> </h1>
+      </div>
+    </section>
+    <hr>
+  </header>
+{% if messages %}
+{% for message in messages %}
+<center>{{message}}</center>
+{% endfor %}
+{% endif %}
+  <main>
+
+
+  <div class="message">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>
+        <span class="closebtn">×</span>
+        <strong>Alert ! </strong> {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+     {% if quiz_answers %}
+     <div class="main-container container">
+<h1>Already Answerd</h1>
+<a class="btn-quiz" href="{{ request.path }}/result">Check Result</a>
+     </div>
+  {% else %}
+  
+    {% if  quiz_questions %}
+    <form action="" method="POST">
+      {% csrf_token %}
+    <section id="quiz-question" class="main-conainer">
+      <h2 class="sec-title"> {{quiztitile}} </h2>
+      {% for quiz_qn in quiz_questions %}
+      <div class="quiz-container">
+        <div class="quiz-card">
+          <h3> {{quiz_qn.qn_name}} </h3>
+          <label for="{{quiz_qn.qn_opt1}}{{quiz_qn.qn_id}}">
+            <input type="radio" id="{{quiz_qn.qn_opt1}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt1}}" />
+            {{quiz_qn.qn_opt1}}
+          </label>
+          <label for="{{quiz_qn.qn_opt2}}{{quiz_qn.qn_id}}">
+            <input type="radio" id="{{quiz_qn.qn_opt2}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt2}}" />
+            {{quiz_qn.qn_opt2}}
+          </label>
+          <label for="{{quiz_qn.qn_opt3}}{{quiz_qn.qn_id}}">
+            <input type="radio" id="{{quiz_qn.qn_opt3}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt3}}" />
+            {{quiz_qn.qn_opt3}}
+          </label>
+          <label for="{{quiz_qn.qn_opt4}}{{quiz_qn.qn_id}}">
+            <input type="radio" id="{{quiz_qn.qn_opt4}}{{quiz_qn.qn_id}}" name="{{quiz_qn.qn_name}}" value="{{quiz_qn.qn_opt4}}" />
+            {{quiz_qn.qn_opt4}}
+          </label>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="main-container">
+        <input style="padding:0.3rem; font-size:1.4rem" onclick="closeFullscreen();" class="btn-quiz" type="submit" value="SUBMIT" />
+      </div>
+      {% else %}
+      <h1>No Question Available</h1>
+      {% endif %}
+       {% endif %}
+
+    
+    {% comment %} <button id="startQuiz" class="btn-quiz" onclick="openFullscreen();">Start Quiz</button> {% endcomment %}
+    
+    </section>
+    </form>
+    
+  </main>
+{% comment %} <script src="{% static 'MyQuiz/js/index.js' %}"></script> {% endcomment %}
+{% endblock main_body %}

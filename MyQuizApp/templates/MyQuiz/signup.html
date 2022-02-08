@@ -1,0 +1,93 @@
+{% extends 'MyQuiz/base.html' %} {% load static %} {% block main_body %}
+<main>
+  <div class="message">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>
+        <span class="closebtn">×</span>
+        <strong>Alert ! </strong> {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <section class="form-section">
+    <div class="form-left">
+      <form method="POST" class="login-form" action="/signup">
+        {% csrf_token %}
+        <h1>SIGN UP</h1>
+        <input
+          type="text"
+          name="firstname"
+          class="box"
+          placeholder="Enter Your First Name"
+          required
+        />
+        <input
+          type="text"
+          name="lastname"
+          class="box"
+          placeholder="Enter Your Last Name"
+          required
+        />
+        <input
+          type="text"
+          name="username"
+          class="box"
+          placeholder="Enter Username"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          class="box"
+          placeholder="Enter Your Email"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          class="box"
+          placeholder="Enter Password"
+          required
+        />
+        <input
+          type="password"
+          name="cpassword"
+          class="box"
+          placeholder="Enter Password Once Agin"
+          required
+        />
+        <input
+          type="mobile"
+          name="mobileno"
+          class="box"
+          placeholder="Enter Your Mobile Number"
+          required
+        />
+        <input
+          type="date"
+          name="dob"
+          class="box"
+          placeholder="Enter Your DOB"
+          required
+        />
+        <select class="box" name="gender" id="" value="gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option selected disabled>Choose Gender</option>
+        </select>
+        <button class="btn" type="submit">Create Account</button><br />
+        <center>
+          <a href="login"><span> Exiting User? Login in </span></a>
+        </center>
+      </form>
+    </div>
+    <div class="form-right">
+      <div class="form-img">
+        <img src="{% static 'MyQuiz/images/signup.jpg' %}" alt="" />
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock main_body %}

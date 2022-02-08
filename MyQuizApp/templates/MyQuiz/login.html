@@ -1,0 +1,49 @@
+{% extends 'MyQuiz/base.html' %} {% load static %} {% block head_content %}{% endblock head_content %} {% block main_body %}
+
+
+<main>
+  <div class="message">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>
+        <span class="closebtn">×</span>
+        <strong>Alert ! </strong> {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+
+  </div>
+  <section class="form-section">
+    <div class="form-left">
+      
+      <form method="POST" class="login-form" action="">
+          {% csrf_token %}
+          <h1>LOGIN</h1>
+        <input
+          type="text"
+          name="username"
+          class="box"
+          placeholder="Enter Username"
+        />
+        <input
+          type="password"
+          name="password"
+          class="box"
+          placeholder="Enter Password"
+        />
+        <a href="#">Forgot Password ?</a>
+        <button class="btn" type="submit">Login</button><br />
+        <center><a  href="#"><span>New User, Create Account</span></a></center>
+      </form>
+    </div>
+    <div class="form-right">
+      <div class="form-img">
+        <img src="{% static 'MyQuiz/images/login.jpg' %}" alt="" />
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock main_body %}
