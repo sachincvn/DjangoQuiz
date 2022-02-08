@@ -27,7 +27,7 @@ SECRET_KEY = '2hp4$&)yoq6w1xv$yd-#_(9n&0&q!_6jc(w0lth8)@3p#fw7jw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','my-quiz1.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','https://quiztestt.herokuapp.com/']
 
 
 # Application definition
