@@ -64,7 +64,7 @@
             </table>
             
             <p>
-              {{quizs.quiz_desc}}
+              {{ quizs.quiz_desc|truncatechars:150 }}
             </p>
             <a href="quiz/{{quizs.quiz_url}}">Start Now</a>
           </div>

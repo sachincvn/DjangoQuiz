@@ -144,7 +144,6 @@ def quizResult(request,slug):
                     'correct_answer':correct_answer,
                     'wrong_answer':wrong_answer,
                     'total_points': correct_answer*10,
-                    'user_answers': user_answers,
                     'quiz_qns' : get_quizsqn,
                 })
 
