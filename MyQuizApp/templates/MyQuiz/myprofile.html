@@ -1,0 +1,88 @@
+{% extends 'MyQuiz/base.html' %} {% block main_body %}
+<h1 class="sec-title">My Profile</h1>
+<div class="container">
+    <div class="table-data" style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>UserName </th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email ID</th>
+            <th>User ID</th>
+            <th>Mobile Number</th>
+            <th>DOB</th>
+            <th>Gender</th>
+          </tr>
+          <tr>
+            <td>{{username}}</td>
+            <td>{{firstname}}</td>
+            <td>{{lastname}}</td>
+            <td>{{email}}</td>
+            <td>{{userid}}</td>
+            <td>{{mobile}}</td>
+            <td>{{dob}}</td>
+            <td>{{gender}}</td>
+          </tr>
+        </table>
+      </div>
+</div><br><br>
+<div class="container main-conainer">
+    <form method="POST" class="login-form" action="/myprofile">
+        {% csrf_token %}
+        <h2>Update Profile</h2>
+        <input
+          type="text"
+          name="firstname"
+          class="box"
+          placeholder="Enter Your First Name"
+          value="{{firstname}}"
+          required
+        />
+        <input
+          type="text"
+          name="lastname"
+          class="box"
+          placeholder="Enter Your Last Name"
+          value="{{lastname}}"
+          required
+        />
+        <input
+          type="text"
+          name="username"
+          class="box"
+          placeholder="Enter Username"
+          value="{{username}}"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          class="box"
+          placeholder="Enter Your Email"
+          value="{{email}}"
+          required
+        />
+        <input
+          type="mobile"
+          name="mobileno"
+          class="box"
+          placeholder="Enter Your Mobile Number"
+          value="{{mobile}}"
+          required
+        />
+        <input
+          type="date"
+          name="dob"
+          class="box"
+          placeholder="Enter Your DOB"
+          value="{{dob}}"
+          required
+        />
+        <select class="box" name="gender" id="" value="gender" required>
+          <option {% if gender == 'Female' %}selected{% endif %} value="Female">Female</option>
+          <option {% if gender  == 'Male' %}selected{% endif %} value="Male">Male</option>
+        </select>
+        <button class="btn" type="submit">Update Profile</button><br />
+      </form>    
+</div>
+{% endblock main_body %}

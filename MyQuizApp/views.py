@@ -1,3 +1,5 @@
+import email
+from re import U
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import quizquestion, quiztopics, useranswers,userProfile
@@ -62,6 +64,34 @@ def userLogout(request):
 def quizIndex(request):
     get_quizs = quiztopics.objects.all()
     return render(request,'MyQuiz/index.html',{'quizs_topic':get_quizs})
+
+def myProfile(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        first_name = current_user.first_name
+        last_name = current_user.last_name
+        email = current_user.email
+        user_id = current_user.id
+        password = current_user.password
+        print(password)
+        user_profile = userProfile.objects.filter(user_id=user_id)
+        for user_detail in user_profile:
+            gender = user_detail.gender
+            mobile_number = user_detail.mobie_number
+            dob = user_detail.dob
+
+                
+        return render(request,"MyQuiz/myprofile.html",
+        {
+            "username":current_user,
+            "firstname":first_name,
+            "lastname":last_name,
+            "email":email,
+            "userid":user_id,
+            "gender":gender,
+            "mobile":mobile_number,
+            "dob":dob,
+        })
 
 
 

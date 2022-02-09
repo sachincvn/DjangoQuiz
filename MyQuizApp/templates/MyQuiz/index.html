@@ -24,9 +24,18 @@
             Languages Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Et voluptatem veniam esse sapiente ipsam?
           </p>
-
-          <button class="btn-primary">Start Quiz</button>
-          <button class="btn-secondary">Register</button>
+          {% if user.is_authenticated %}
+          {% if user.is_staff %}
+              <a  style="margin-right:5px;color:white" class="nav-btn btn-primary" href="/addquiz">Admin</a>
+              <a  style="margin-right:5px;color:black" class="nav-btn btn-secondary" href="#startQuiz">Start Quiz</a>
+            {% else %}
+            <a  style="margin-right:5px;color:white" class="nav-btn btn-primary" href="/profile">MyProfile</a>
+              <a  style="margin-right:5px;color:black" class="nav-btn btn-secondary" href="#startQuiz">Start Quiz</a>
+          {% endif %}
+          {% else %}
+          <a  style="margin-right:5px;color:white;width: 6rem;display: inline-block;" class="nav-btn btn-primary" href="/login">Login</a>
+              <a  style="margin-right:5px;color:black" class="nav-btn btn-secondary" href="/signup">Register</a>
+          {% endif %}
         </div>
         <div class="right-section">
           <img src="{% static 'MyQuiz/images/quizz.jpg' %}" alt="" />
@@ -35,7 +44,7 @@
       
 <main>
       <section class="main-conainer">
-        <h2 class="sec-title"> Choose Category </h2>
+        <h2 id="startQuiz" class="sec-title"> Choose Category </h2>
       <div class="container">
 
         {% if quizs_topic %}

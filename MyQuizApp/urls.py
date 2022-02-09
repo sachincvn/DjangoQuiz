@@ -10,6 +10,7 @@ urlpatterns = [
     path('login',views.logIn,name='Login'),
     path('signup',views.signUp,name='SignUp'),
     path('logout',views.userLogout,name='Logout'),
+    path('myprofile',views.myProfile,name='MyProfile'),
     path('<str:slug>/user-response',views.userResponse,name='UserResponse'),
     path('deletequiz/<str:slug>',views.deleteQuiz,name="deletequiz"),
     path('editquestion/<int:id>',views.editQuestion,name="editquestion"),
