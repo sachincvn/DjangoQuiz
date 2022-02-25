@@ -27,7 +27,7 @@
         <div id="MenuItems" class="quick-links">
           <ul>
             <a href="/">Home</a>
-            <a href="#">About</a>          
+            <a href="/about">About</a>          
           {% if user.is_authenticated %}
           {% if user.is_staff %}
               <a  style="margin-right:5px;color:white" class="nav-btn" href="/addquiz">Admin</a>
@@ -38,7 +38,7 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-              <a href="#">Edit Profile</a>
+              <a href="/myprofile">Edit Profile</a>
               <a href="/logout">Logout</a>
             </div>
           </div>
@@ -61,10 +61,8 @@
       <div class="quick-link">
         <ul>
           <a href="#">Home</a>
-          <a href="#">Login</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Features</a>
+          <a href="/login">Login</a>
+          <a href="/about">About</a>
         </ul>
       </div>
       <hr />

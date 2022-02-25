@@ -15,4 +15,5 @@ urlpatterns = [
     path('deletequiz/<str:slug>',views.deleteQuiz,name="deletequiz"),
     path('editquestion/<int:id>',views.editQuestion,name="editquestion"),
     path('deletequestion/<int:id>',views.deleteQuestion,name="deletequestion"),
+    path('about',views.about,name='about')
 ]

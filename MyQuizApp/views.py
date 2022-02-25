@@ -24,13 +24,23 @@ def signUp(request):
             users_dob =  request.POST['dob']
             users_gender =  request.POST['gender']
 
-            myuser = User.objects.create_user(users_user_name,users_email_id,users_c_password)
-            myuser.first_name = users_first_name
-            myuser.last_name = users_last_name
-            add_users = userProfile(mobie_number=users_mobile,dob=users_dob,gender=users_gender,is_admin=False,user=myuser)
-            myuser.save()
-            add_users.save()
-            return redirect("Login")
+            if(len(users_user_name)<6):
+                # print("Username Must Be Atleast 6 charcher")
+                messages.error(request, 'Username Must Be Atleast 6 charcher')
+            elif (len(users_c_password)<6):
+                # print("Password must be more then 6 character")
+                messages.error(request, 'Password must be more then 6 character')
+            elif(len(users_mobile)<10):
+                # print("Enter Correct Mobile Number")
+                messages.error(request, 'Enter Correct Mobile Number')
+            else:
+                myuser = User.objects.create_user(users_user_name,users_email_id,users_c_password)
+                myuser.first_name = users_first_name
+                myuser.last_name = users_last_name
+                add_users = userProfile(mobie_number=users_mobile,dob=users_dob,gender=users_gender,is_admin=False,user=myuser)
+                myuser.save()
+                add_users.save()
+                return redirect("Login")
         else:
             print("Wrong")
 
@@ -341,3 +351,7 @@ def deleteQuestion(request,id):
     else:
         return HttpResponse("LoooooooooL")
     return HttpResponseRedirect('/') 
+
+
+def about(request):
+    return render(request,"MyQuiz/about.html") 

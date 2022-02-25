@@ -1,0 +1,41 @@
+{% extends 'MyQuiz/base.html' %} {% load static %} {% block main_body %}
+{% block head_content %}
+<style>
+    div{
+        margin:20px;
+    }
+    p{
+        margin:10px 0px;
+    }
+</style>
+{% endblock head_content %}
+
+  <div class="main-conainer container">
+    <h2 id="startQuiz" class="sec-title">About Us</h2>
+  <p>
+    Web-based online test system which can create quizzes competitively and
+    collaboratively by students for the purpose of reducing the load required
+    for a teacher and promoting interactions among students and between the
+    teacher and students.
+  </p>
+  <p>
+    And This provides automated calculated score’s/points. The number of correct 
+    answer and wrong answer provided by the user
+  </p>
+  <p>
+    This Project is Devloped with the Hyper Text Markup Language(HTML), 
+    Cascading Style Sheet(CSS) and Basic JavaScript (JS) For Front End. And Python 
+    programming language for backend with DJango Framework. And PhpMyAdmin
+    /MYSql For Database. 
+  </p>
+  <p>
+    A User/Student need to signup or login to the webpage to start the Test, without 
+    login credentials the user cannot start the quiz.
+  </p>
+  <p>
+    The Admin/Staff can add Quizs and Question to this web application, And they 
+    can manage quiz, and also they can modify questions and data in the database .
+    The Regular Users cannot add a quiz or question.
+  </p>
+</div>
+{% endblock main_body %}
